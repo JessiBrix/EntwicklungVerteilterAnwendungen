@@ -1,0 +1,4 @@
+Welche Informationen müssen in einem verteilten System über Informationen ausgetauscht werden?
+
+Wichtig ist, dass Nachrichten über die Aktionen auf der Strecke augetauscht werden.
+Dazu zählt das reservieren, befahren, verlassen und freigeben und von welchem Rechner diese Anfragen kommen.

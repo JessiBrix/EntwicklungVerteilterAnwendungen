@@ -1,0 +1,6 @@
+grant {
+	// Allow everything for now
+	 permission java.security.AllPermission;
+	// permission java.net.SocketPermission "localhost", "accept,connect,listen";
+	// permission java.net.SocketPermission "172.22.111.111", "accept,connect,listen";
+};
