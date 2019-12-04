@@ -1,73 +1,51 @@
 
 package client;
 
+import com.sun.jersey.api.client.Client;
 import common.StreckeI;
 import server.MethodResponse;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 
-
-@Path("client")
 public class ClientStub implements StreckeI // Stub
 {
 
-	private long seqNr = 1;
 
-    @PUT
-    @Path("reservierung")
-    public Boolean reserviere(Integer zugnummer, Boolean bRichtung, Integer iAbschnitt)
-	{
+    private long seqNr = 1;
 
-	    new MethodResponse();
-	    return true;
+    public Boolean reserviere(Integer zugnummer, Boolean bRichtung, Integer iAbschnitt) {
+        final MethodResponse response = Client.create().resource("http://localhost:8080/rest/strecke/reserviere/" + zugnummer + "/" + bRichtung + "/" + iAbschnitt).post(MethodResponse.class);
+        return new Boolean(response.getValue());
     }
 
-    @PUT
-    @Path("startgleis")
-    public String wechselnVon(Integer zugnummer, Boolean bRichtung, Integer iAbschnitt)
-	{
-        new MethodResponse();
-        return "";
+
+    public String wechselnVon(Integer zugnummer, Boolean bRichtung, Integer iAbschnitt) {
+        return Client.create().resource("http://localhost:8080/rest/strecke/wechselnVon/" + zugnummer + "/" + bRichtung + "/" + iAbschnitt).post(String.class);
     }
 
-    @PUT
-    @Path("zielgleis")
-    public String wechselnNach(Integer zugnummer, Boolean bRichtung, Integer iAbschnitt)
-	{
-        new MethodResponse();
-        return "";
+
+    public String wechselnNach(Integer zugnummer, Boolean bRichtung, Integer iAbschnitt) {
+        return Client.create().resource("http://localhost:8080/rest/strecke/wechselnNach/" + zugnummer + "/" + bRichtung + "/" + iAbschnitt).post(String.class);
     }
 
-    @PUT
-    @Path("freigabegleis")
-    public Boolean freigeben(Integer zugnummer, Boolean bRichtung, Integer iAbschnitt)
-	{
-        new MethodResponse();
-        return true;
+    public Boolean freigeben(Integer zugnummer, Boolean bRichtung, Integer iAbschnitt) {
+        final MethodResponse response = Client.create().resource("http://localhost:8080/rest/strecke/freigeben/" + zugnummer + "/" + bRichtung + "/" + iAbschnitt).post(MethodResponse.class);
+        return new Boolean(response.getValue());
     }
 
-    @PUT
-    @Path("verlassengleis")
-    public String verlassen(Integer zugnummer, Boolean bRichtung)
-	{
-        new MethodResponse();
-        return "";
+
+    public String verlassen(Integer zugnummer, Boolean bRichtung) {
+        return Client.create().resource("http://localhost:8080/rest/strecke/verlassen/" + zugnummer + "/" + bRichtung).post(String.class);
     }
 
-    @GET
-    @Path("streckenlaenge")
-    public Integer getStreckenLaenge()
-	{
-        new MethodResponse();
-        return 0;
+    public Integer getStreckenLaenge() {
+        final MethodResponse response = Client.create().resource("http://localhost:8080/rest/strecke/streckenlaenge/").get(MethodResponse.class);
+        return new Integer(response.getValue());
     }
 
-    @GET
-    @Path("abschnitt")
-    public Integer getAbschnitt(Boolean bRichtung, Integer iAbschnitt)
-	{
-        new MethodResponse();
-        return 0;
+    public Integer getAbschnitt(Boolean bRichtung, Integer iAbschnitt) {
+        final MethodResponse response = Client.create().resource("http://localhost:8080/rest/strecke/abschnitt/" + bRichtung + "/" + iAbschnitt).get(MethodResponse.class);
+        return new Integer(response.getValue());
     }
+
+
 }
